@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
 class UserComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div>
-        user Component
+        {this.props.users}
       </div>
     );
   }
