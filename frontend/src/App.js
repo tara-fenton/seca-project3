@@ -6,19 +6,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: {}
+      users: []
     };
 
     // this.addDebit = this.addDebit.bind(this);
   }
   componentDidMount() {
     fetch("http://localhost:8080/api/users", {
-      headers : {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-       }
-
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
     })
       .then(res => res.json())
       .then(users => {
@@ -29,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <UserComponent />
+        <UserComponent users={this.state.users} />
       </div>
     );
   }
