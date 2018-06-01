@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class UserComponent extends Component {
+class UsersComponent extends Component {
   render() {
     const users = this.props.users.map((user, i) => {
       return (
@@ -17,4 +17,4 @@ class UserComponent extends Component {
   }
 }
 
-export default UserComponent;
+export default UsersComponent;
