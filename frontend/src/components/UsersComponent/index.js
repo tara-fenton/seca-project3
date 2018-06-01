@@ -1,11 +1,26 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
+
 
 class UsersComponent extends Component {
+  constructor() {
+    super();
+    // this.state = {
+    //   user: [],
+    //   //currentUser: null
+    // };
+
+    this.click = this.click.bind(this);
+  }
+  click() {
+    console.log('i was clicked');
+  }
   render() {
     const users = this.props.users.map((user, i) => {
       return (
         <div key={i} className="thing">
-          <p>Name: <a href={`user/${user.id}`}>{user.firstName} {user.lastName}</a></p>
+          {/* onClick={this.click} */}
+          <p>Name: <Link to={`/users/${user.id}/edit`}>{user.firstName} {user.lastName}</Link></p>
         </div>
       );
     });

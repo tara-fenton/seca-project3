@@ -31,12 +31,13 @@ class App extends Component {
   render() {
     const Users = () => <UsersComponent users={this.state.users} />;
     const EditUser = () => <EditUserComponent user={this.state.currentUser} />;
+    // const EditUser = () => <EditUserComponent  />;
     return (
       <Router>
        <Switch>
          {/* <Route exact path="/" render={HomeComponent} /> */}
          <Route exact path="/users" render={Users} />
-         <Route exact path="/edit/:id" render={EditUser} />
+         <Route path="/users/:id/edit" render={EditUser} />
       </Switch>
     </Router>
     );
