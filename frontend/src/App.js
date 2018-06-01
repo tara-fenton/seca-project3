@@ -1,12 +1,16 @@
 import React, { Component } from "react";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 import "./App.css";
 import UsersComponent from "./components/UsersComponent";
+import EditUserComponent from "./components/EditUserComponent";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      users: []
+      users: [],
+      currentUser: null
     };
 
     // this.addDebit = this.addDebit.bind(this);
@@ -25,10 +29,16 @@ class App extends Component {
       .catch(err => console.log(err));
   }
   render() {
+    const Users = () => <UsersComponent users={this.state.users} />;
+    const EditUser = () => <EditUserComponent user={this.state.currentUser} />;
     return (
-      <div className="App">
-        <UsersComponent users={this.state.users} />
-      </div>
+      <Router>
+       <Switch>
+         {/* <Route exact path="/" render={HomeComponent} /> */}
+         <Route exact path="/users" render={Users} />
+         <Route exact path="/edit/:id" render={EditUser} />
+      </Switch>
+    </Router>
     );
   }
 }

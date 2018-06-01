@@ -5,10 +5,7 @@ class UsersComponent extends Component {
     const users = this.props.users.map((user, i) => {
       return (
         <div key={i} className="thing">
-          <p>First Name: {user.firstName}</p>
-          <p>Last Name: ${user.lastName}</p>
-          <p>Email: {user.email}</p>
-          <p>Gender: {user.gender}</p>
+          <p>Name: <a href={`user/${user.id}`}>{user.firstName} {user.lastName}</a></p>
         </div>
       );
     });
