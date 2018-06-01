@@ -30,7 +30,9 @@ class App extends Component {
   }
   render() {
     const Users = () => <UsersComponent users={this.state.users} />;
-    const EditUser = () => <EditUserComponent user={this.state.currentUser} />;
+    const EditUser = props => <EditUserComponent {...props} user={this.state.currentUser} />;
+
+    // render = {props => <PageStart {...props} key={this.props.location.key} /> } /
     // const EditUser = () => <EditUserComponent  />;
     return (
       <Router>
