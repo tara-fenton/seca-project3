@@ -10,9 +10,9 @@ class EditUserComponent extends Component {
       editedUserData: {
         id: 0,
         firstName: "",
-        lastName: "",
-        email: "",
-        gender: ""
+        lastName: "test",
+        email: "test",
+        gender: "test"
       },
       edited: false
     };
@@ -25,10 +25,10 @@ class EditUserComponent extends Component {
     const { id } = this.props.match.params;
     this.setState(prevState => ({
       editedUserData: {
-          ...prevState.editedUserData,
-          id: Number(id)
+        ...prevState.editedUserData,
+        id: Number(id)
       }
-  }))
+    }));
 
     fetch(`http://localhost:8080/api/users/${id}`)
       .then(response => response.json())
@@ -36,7 +36,7 @@ class EditUserComponent extends Component {
         console.log(userData);
         this.setState({
           user: userData,
-          userLoaded: true,
+          userLoaded: true
         });
       });
   }
@@ -52,6 +52,19 @@ class EditUserComponent extends Component {
   onSubmit(evt) {
     evt.preventDefault();
     console.log(this.state.editedUserData);
+
+    fetch(`http://localhost:8080/api/users/`, {
+    // fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
+      // method: "PATCH",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // ...editedUserData
+      })
+    });
   }
   render() {
     return (
