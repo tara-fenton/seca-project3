@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "./App.css";
 import UsersComponent from "./components/UsersComponent";
 import EditUserComponent from "./components/EditUserComponent";
+import AddUserComponent from "./components/AddUserComponent";
 
 class App extends Component {
   constructor() {
@@ -31,6 +32,7 @@ class App extends Component {
   render() {
     const Users = () => <UsersComponent users={this.state.users} />;
     const EditUser = props => <EditUserComponent {...props} user={this.state.currentUser} />;
+    const AddUser = props => <AddUserComponent />;
 
     // render = {props => <PageStart {...props} key={this.props.location.key} /> } /
     // const EditUser = () => <EditUserComponent  />;
@@ -40,6 +42,7 @@ class App extends Component {
          {/* <Route exact path="/" render={HomeComponent} /> */}
          <Route exact path="/users" render={Users} />
          <Route path="/users/:id/edit" render={EditUser} />
+         <Route path="/users/new" render={AddUser} />
       </Switch>
     </Router>
     );

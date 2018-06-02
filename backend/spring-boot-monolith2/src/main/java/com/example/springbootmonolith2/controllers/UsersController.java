@@ -1,7 +1,7 @@
-package com.example.springbootmonolith.controllers;
+package com.example.springbootmonolith2.controllers;
 
-import com.example.springbootmonolith.models.User;
-import com.example.springbootmonolith.repositories.UserRepository;
+import com.example.springbootmonolith2.models.User;
+import com.example.springbootmonolith2.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

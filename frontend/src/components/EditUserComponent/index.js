@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+
 
 class EditUserComponent extends Component {
   constructor(props) {
@@ -54,19 +56,20 @@ class EditUserComponent extends Component {
     console.log(this.state.editedUserData);
 
     fetch(`http://localhost:8080/api/users/`, {
-    // fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
+      // fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
       // method: "PATCH",
       method: "POST",
+      body: JSON.stringify(this.state.editedUserData),
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        // ...editedUserData
-      })
+      }
     });
   }
   render() {
+    const { edited } = this.state;
+    if (edited) {
+      return <Redirect to="/" />;
+    }
     return (
       <div id="parent">
         <div>Edit User</div>
