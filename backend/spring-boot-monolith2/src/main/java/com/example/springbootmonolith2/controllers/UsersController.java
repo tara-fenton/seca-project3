@@ -3,21 +3,21 @@ package com.example.springbootmonolith2.controllers;
 import com.example.springbootmonolith2.models.User;
 import com.example.springbootmonolith2.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+
 @RestController
 public class UsersController {
 
-
     @Autowired
     private UserRepository userRepository;
-
     @GetMapping("/api/users")
-    public Iterable<User> findAllUsers() {
-        return userRepository.findAll();
+    public Iterable<User> findAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     @GetMapping("/api/users/{userId}")
