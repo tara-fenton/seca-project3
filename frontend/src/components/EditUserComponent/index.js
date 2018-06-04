@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Button } from 'reactstrap';
+import { Button } from "reactstrap";
 
 class EditUserComponent extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class EditUserComponent extends Component {
     console.log(this.state.editedUserData);
 
     // fetch(`http://localhost:8080/api/users/`, {
-      fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
+    fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
       method: "PATCH",
       // method: "POST",
       body: JSON.stringify(this.state.editedUserData),
@@ -75,60 +75,54 @@ class EditUserComponent extends Component {
       return <Redirect to="/users" />;
     }
     return (
-      <div id="parent">
+      <div className="main">
         <h1>Edit User</h1>
         {this.state.userLoaded ? (
-          <div>
-            <form onSubmit={this.onSubmit}>
-              <label>
-                First Name{" "}
-                <input
-                  className="form-control"
-                  type="text"
-                  onChange={evt =>
-                    this.onInputChange("firstName", evt.target.value)
-                  }
-                  placeholder={this.state.user.firstName}
-                />
-              </label>
-              <label>
-                Last Name{" "}
-                <input
-                  className="form-control"
-                  type="text"
-                  onChange={evt =>
-                    this.onInputChange("lastName", evt.target.value)
-                  }
-                  placeholder={this.state.user.lastName}
-                />
-              </label>
-              <label>
-                Email{" "}
-                <input
-                  className="form-control"
-                  type="text"
-                  onChange={evt =>
-                    this.onInputChange("email", evt.target.value)
-                  }
-                  placeholder={this.state.user.email  }
-                />
-              </label>
-              <label>
-                Gender{" "}
-                <input
-                  className="form-control"
-                  type="text"
-                  onChange={evt =>
-                    this.onInputChange("gender", evt.target.value)
-                  }
-                  placeholder={this.state.user.gender}
-                />
-              </label>
-              <Button type="submit" value="submit" outline color="primary">
-                Submit
-              </Button>
-            </form>
-          </div>
+          <form onSubmit={this.onSubmit} className="form">
+            <label>
+              First Name{" "}
+              <input
+                className="form-control"
+                type="text"
+                onChange={evt =>
+                  this.onInputChange("firstName", evt.target.value)
+                }
+                placeholder={this.state.user.firstName}
+              />
+            </label>
+            <label>
+              Last Name{" "}
+              <input
+                className="form-control"
+                type="text"
+                onChange={evt =>
+                  this.onInputChange("lastName", evt.target.value)
+                }
+                placeholder={this.state.user.lastName}
+              />
+            </label>
+            <label>
+              Email{" "}
+              <input
+                className="form-control"
+                type="text"
+                onChange={evt => this.onInputChange("email", evt.target.value)}
+                placeholder={this.state.user.email}
+              />
+            </label>
+            <label>
+              Gender{" "}
+              <input
+                className="form-control"
+                type="text"
+                onChange={evt => this.onInputChange("gender", evt.target.value)}
+                placeholder={this.state.user.gender}
+              />
+            </label>
+            <Button type="submit" value="submit" outline color="primary" className="form-submit">
+              <span className="form-submit">Submit</span>
+            </Button>
+          </form>
         ) : (
           "Loading"
         )}
