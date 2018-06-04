@@ -6,18 +6,21 @@ import UsersComponent from "./components/UsersComponent";
 import EditUserComponent from "./components/EditUserComponent";
 import AddUserComponent from "./components/AddUserComponent";
 
+var root = 'http://localhost:8080/api';
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       users: [],
-      currentUser: null
+      currentUser: null,
+      pageSize: null
     };
-
-    // this.addDebit = this.addDebit.bind(this);
   }
+  // get the users to display in the UsersComponent
   componentDidMount() {
-    fetch("http://localhost:8080/api/users", {
+    console.log("query string " + window.location.href, window.location.search.substring(1));
+    fetch(`${root}/users?page=2`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -34,12 +37,9 @@ class App extends Component {
     const EditUser = props => <EditUserComponent {...props} user={this.state.currentUser} />;
     const AddUser = props => <AddUserComponent />;
 
-    // render = {props => <PageStart {...props} key={this.props.location.key} /> } /
-    // const EditUser = () => <EditUserComponent  />;
     return (
       <Router>
        <Switch>
-         {/* <Route exact path="/" render={HomeComponent} /> */}
          <Route exact path="/users" render={Users} />
          <Route path="/users/:id/edit" render={EditUser} />
          <Route path="/users/new" render={AddUser} />
