@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 import UsersComponent from "./components/UsersComponent";
 import EditUserComponent from "./components/EditUserComponent";
 import AddUserComponent from "./components/AddUserComponent";
 
-var root = 'http://localhost:8080/api';
+var root = "http://localhost:8080/api";
 
 class App extends Component {
   constructor() {
@@ -18,9 +18,8 @@ class App extends Component {
     };
   }
   // get the users to display in the UsersComponent
-  componentDidMount() {
-    console.log("query string " + window.location.href, window.location.search.substring(1));
-    fetch(`${root}/users?page=2`, {
+  fetchUsers() {
+    fetch(`${root}/users`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -32,19 +31,32 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
+  componentDidMount() {
+    this.fetchUsers();
+  }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   const prevUsers = prevState.users;
+  //   const newUsers = this.state.users;
+  //   if (prevUsers !== newUsers) {
+  //     this.fetchUsers();
+  //   }
+  // }
+
   render() {
     const Users = () => <UsersComponent users={this.state.users} />;
-    const EditUser = props => <EditUserComponent {...props} user={this.state.currentUser} />;
+    const EditUser = props => (
+      <EditUserComponent {...props} user={this.state.currentUser} />
+    );
     const AddUser = props => <AddUserComponent />;
 
     return (
       <Router>
-       <Switch>
-         <Route exact path="/users" render={Users} />
-         <Route path="/users/:id/edit" render={EditUser} />
-         <Route path="/users/new" render={AddUser} />
-      </Switch>
-    </Router>
+        <Switch>
+          <Route exact path="/users" render={Users} />
+          <Route path="/users/:id/edit" render={EditUser} />
+          <Route path="/users/new" render={AddUser} />
+        </Switch>
+      </Router>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-
+import { Button } from 'reactstrap';
 
 class EditUserComponent extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class EditUserComponent extends Component {
       editedUserData: {
         id: 0,
         firstName: "",
-        lastName: "test",
-        email: "test",
-        gender: "test"
+        lastName: "",
+        email: "",
+        gender: ""
       },
       edited: false
     };
@@ -55,40 +55,78 @@ class EditUserComponent extends Component {
     evt.preventDefault();
     console.log(this.state.editedUserData);
 
-    fetch(`http://localhost:8080/api/users/`, {
-      // fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
-      // method: "PATCH",
-      method: "POST",
+    // fetch(`http://localhost:8080/api/users/`, {
+      fetch(`http://localhost:8080/api/users/${this.state.editedUserData.id}`, {
+      method: "PATCH",
+      // method: "POST",
       body: JSON.stringify(this.state.editedUserData),
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    }).then(
+      this.setState({
+        edited: true
+      })
+    );
   }
   render() {
     const { edited } = this.state;
     if (edited) {
-      return <Redirect to="/" />;
+      return <Redirect to="/users" />;
     }
     return (
       <div id="parent">
-        <div>Edit User</div>
+        <h1>Edit User</h1>
         {this.state.userLoaded ? (
           <div>
             <form onSubmit={this.onSubmit}>
               <label>
                 First Name{" "}
                 <input
+                  className="form-control"
                   type="text"
                   onChange={evt =>
                     this.onInputChange("firstName", evt.target.value)
                   }
-                  value={this.state.editedUserData.firstName}
+                  placeholder={this.state.user.firstName}
                 />
               </label>
-              <button type="submit" value="submit">
+              <label>
+                Last Name{" "}
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={evt =>
+                    this.onInputChange("lastName", evt.target.value)
+                  }
+                  placeholder={this.state.user.lastName}
+                />
+              </label>
+              <label>
+                Email{" "}
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={evt =>
+                    this.onInputChange("email", evt.target.value)
+                  }
+                  placeholder={this.state.user.email  }
+                />
+              </label>
+              <label>
+                Gender{" "}
+                <input
+                  className="form-control"
+                  type="text"
+                  onChange={evt =>
+                    this.onInputChange("gender", evt.target.value)
+                  }
+                  placeholder={this.state.user.gender}
+                />
+              </label>
+              <Button type="submit" value="submit" outline color="primary">
                 Submit
-              </button>
+              </Button>
             </form>
           </div>
         ) : (

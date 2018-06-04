@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import { Button } from "reactstrap";
 
 class AddUserComponent extends Component {
   constructor(props) {
@@ -74,26 +75,51 @@ class AddUserComponent extends Component {
     }
 
     return (
-      <div id="parent">
-        <div>Add User</div>
-
-        <div>
-          <form onSubmit={this.onSubmit}>
-            <label>
-              First Name{" "}
-              <input
-                type="text"
-                onChange={evt =>
-                  this.onInputChange("firstName", evt.target.value)
-                }
-                value={this.state.user.firstName}
-              />
-            </label>
-            <button type="submit" value="submit">
-              Submit
-            </button>
-          </form>
-        </div>
+      <div className="main">
+        <h1>Add New User</h1>
+        <form onSubmit={this.onSubmit} className="form">
+          <label>
+            First Name{" "}
+            <input
+              className="form-control"
+              type="text"
+              onChange={evt =>
+                this.onInputChange("firstName", evt.target.value)
+              }
+              placeholder="First Name"
+            />
+          </label>
+          <label>
+            Last Name{" "}
+            <input
+              className="form-control"
+              type="text"
+              onChange={evt => this.onInputChange("lastName", evt.target.value)}
+              placeholder="Last Name"
+            />
+          </label>
+          <label>
+            Email{" "}
+            <input
+              className="form-control"
+              type="text"
+              onChange={evt => this.onInputChange("email", evt.target.value)}
+              placeholder="Email"
+            />
+          </label>
+          <label>
+            Gender{" "}
+            <input
+              className="form-control"
+              type="text"
+              onChange={evt => this.onInputChange("gender", evt.target.value)}
+              placeholder="Gender"
+            />
+          </label>
+          <Button type="submit" value="submit" outline color="primary" className="form-submit">
+            <span className="form-submit">Submit</span>
+          </Button>
+        </form>
       </div>
     );
   }

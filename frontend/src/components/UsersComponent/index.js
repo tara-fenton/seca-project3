@@ -15,6 +15,7 @@ class UsersComponent extends Component {
   onChangePage(pageOfItems) {
     // update state with new page of items
     this.setState({ pageOfItems: pageOfItems });
+    // console.log("pager.currentPage" + pager.currentPage);
   }
 
   render() {
@@ -38,6 +39,11 @@ class UsersComponent extends Component {
     return (
       <div>
         <div className="container">
+          <h1>Users</h1>
+          <div className="nav">
+            <Link to="/users/new">Add User</Link>
+            <br />
+          </div>
           <div className="text-center">
             <div>{users}</div>
             <Pagination

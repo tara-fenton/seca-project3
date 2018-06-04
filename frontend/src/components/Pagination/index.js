@@ -108,7 +108,7 @@ class Pagination extends React.Component {
 
     render() {
         var pager = this.state.pager;
-
+console.log("pager in pagination "+pager.currentPage);
         if (!pager.pages || pager.pages.length <= 1) {
             // don't display pager if there is only 1 page
             return null;
