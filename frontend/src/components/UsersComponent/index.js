@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Table } from "reactstrap";
+
 import Pagination from "../../components/Pagination";
 
 class UsersComponent extends Component {
@@ -25,27 +27,42 @@ class UsersComponent extends Component {
 
     const users = this.state.pageOfItems.map((user, i) => {
       return (
-        <div key={i} className="thing">
-          <p>
-            Name:{" "}
+        <tr key={i}>
+          <td>{user.id}</td>
+          <td>
             <Link to={`/users/${user.id}/edit`}>
               {user.firstName} {user.lastName}
             </Link>
-          </p>
-        </div>
+          </td>
+          <td>
+            {/* /api/users/{userId} DELETE */}
+          <a class="btn btn-primary" href={`/users/${user.id}/edit`} role="button">Delete</a>
+        </td>
+        </tr>
       );
     });
 
     return (
       <div>
-        <div className="container">
+        <div className="main">
           <h1>Users</h1>
-          <div className="nav">
-            <Link to="/users/new">Add User</Link>
-            <br />
-          </div>
+
           <div className="text-center">
-            <div>{users}</div>
+            <Table striped bordered condensed hover>
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>Name</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {users}
+              </tbody>
+            </Table>
+            <div className="nav">
+              <Link to="/users/new">Add User</Link>
+            </div>
             <Pagination
               items={this.props.users}
               onChangePage={this.onChangePage}
