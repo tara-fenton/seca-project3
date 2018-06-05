@@ -18,6 +18,7 @@ public class UsersController {
     @GetMapping("/api/users")
     public Iterable<User> findAllUsers() {
         return userRepository.findAllByOrderByIdAsc();
+//        return userRepository.findAll(pageable);
     }
 
     @GetMapping("/api/users/{userId}")
